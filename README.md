@@ -6,10 +6,10 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- Asafe Rodrigues Garcia
+- Caio Silveira Figueiredo
+- Erick Gabriel Chiaradia Kalil e Silva
+- Matheus Wike Carvalho
 
 ## Estrutura do projeto
 
@@ -22,42 +22,32 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
-
-Exemplo:
-
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
+Plantão Responsável é um jogo em que o jogador controla um revisor que supervisiona as sugestões de uma IA usada em uma escola ou em uma clínica. No início, o jogador escolhe o ambiente, e cada um tem seu próprio fundo e seus próprios cartões. Cartões com sugestões da IA caem do alto da tela, cada um com um texto curto e um nível de confiança. Alguns cartões estão corretos e outros contêm erros, vieses ou exageram na confiança. O jogador ganha pontos ao tomar a decisão certa e perde vidas ao aprovar sugestões erradas. A partida termina quando as vidas acabam ou quando as 3 rodadas do ambiente escolhido são concluídas.
 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
-
-Exemplo:
-
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
+O objetivo é aprovar as sugestões corretas da IA (coletando os cartões) e rejeitar as incorretas (deixando-as passar), usando a revisão humana de forma estratégica. Para vencer, o jogador precisa concluir as 3 rodadas do ambiente escolhido com pelo menos 1 vida e uma taxa mínima de decisões corretas.
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- O jogador escolhe o ambiente (escola ou clínica) no menu inicial.
+- O jogador começa com 3 vidas, 0 pontos e 3 cargas de revisão.
+- Coletar um cartão correto soma pontos; deixar passar um cartão incorreto também soma pontos.
+- Coletar um cartão incorreto tira uma vida e zera o combo de acertos.
+- Deixar passar um cartão correto não tira vida, mas faz perder o combo e a pontuação daquele cartão.
+- A revisão gasta uma carga e revela se o cartão mais próximo é confiável; as cargas se recarregam a cada 5 acertos seguidos.
+- A velocidade dos cartões aumenta a cada rodada.
+- A partida termina quando as vidas chegam a zero ou quando as 3 rodadas acabam.
 
 ## Controles
 
-Informe as teclas ou comandos utilizados no jogo.
-
-Exemplo:
-
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
+- Tecla 1: escolher o ambiente escola (no menu)
+- Tecla 2: escolher o ambiente clínica (no menu)
+- Seta para esquerda (ou A): mover para a esquerda
+- Seta para direita (ou D): mover para a direita
+- Espaço: revisar o cartão mais próximo
+- Enter: iniciar ou reiniciar a partida
+- P: pausar o jogo
 - ESC: sair do jogo
 
 ## Como executar o projeto
