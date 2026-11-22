@@ -39,6 +39,11 @@ CARTAO_ROTULO = (110, 115, 130)
 CONFIANCA_COR = (110, 80, 200)
 CONFIANCA_TRILHO = (225, 222, 238)
 
+FIM_ESCURECER = (0, 0, 0, 160)  # o 4º valor é a transparência (0 a 255)
+FIM_PAINEL = (35, 45, 60)
+FIM_TITULO = (240, 90, 90)
+FIM_DICA = (170, 180, 195)
+
 # ----------------------------------------------------------------------------
 # Medidas da interface
 # ----------------------------------------------------------------------------
@@ -222,11 +227,33 @@ def desenhar_cartao(tela, rect, dados):
 
 
 # ----------------------------------------------------------------------------
-# Funções ainda em construção (próximos commits).
-# Já existem com a assinatura usada no main.py para o jogo abrir sem erro.
+# Fim de jogo
 # ----------------------------------------------------------------------------
-
-
 def desenhar_fim_de_jogo(tela, pontos):
-    """Desenha a tela de fim de jogo com a pontuação final. (em construção)"""
-    pass
+    """Escurece a cena e mostra um painel com a pontuação final e os controles."""
+    largura = tela.get_width()
+    altura = tela.get_height()
+
+    # Camada preta semitransparente por cima de tudo (o jogo fica ao fundo).
+    escurecer = pygame.Surface((largura, altura), pygame.SRCALPHA)
+    escurecer.fill(FIM_ESCURECER)
+    tela.blit(escurecer, (0, 0))
+
+    # Painel central.
+    painel = pygame.Rect(0, 0, 440, 230)
+    painel.center = (largura // 2, altura // 2)
+    pygame.draw.rect(tela, FIM_PAINEL, painel, border_radius=14)
+    pygame.draw.rect(tela, HUD_TEXTO, painel, width=2, border_radius=14)
+
+    titulo = pegar_fonte(48, negrito=True).render("FIM DE JOGO", True, FIM_TITULO)
+    tela.blit(titulo, titulo.get_rect(center=(painel.centerx, painel.top + 55)))
+
+    texto_pontos = pegar_fonte(28, negrito=True).render(
+        f"Pontuação final: {pontos}", True, HUD_TEXTO)
+    tela.blit(texto_pontos, texto_pontos.get_rect(center=(painel.centerx, painel.top + 120)))
+
+    fonte_dica = pegar_fonte(18)
+    dica_reiniciar = fonte_dica.render("Enter ou R: jogar de novo", True, FIM_DICA)
+    dica_sair = fonte_dica.render("ESC: sair", True, FIM_DICA)
+    tela.blit(dica_reiniciar, dica_reiniciar.get_rect(center=(painel.centerx, painel.top + 170)))
+    tela.blit(dica_sair, dica_sair.get_rect(center=(painel.centerx, painel.top + 198)))
