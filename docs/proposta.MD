@@ -83,3 +83,11 @@ Menu simples para escolher entre dois ambientes (escola e clínica), cada um com
 ## 15. Declaração de originalidade
 
 Declaramos que a ideia, as regras e o código deste projeto são de autoria do grupo. Qualquer recurso externo (imagens, sons, fontes, código ou tutoriais) será identificado no README.md, com origem e licença quando possível.
+
+## 16. Atualizações desde a proposta (Entrega 2)
+
+- **Interface desenhada por código:** o fundo da escola (parede, quadro-negro e piso), o HUD, os cartões e a tela de fim de jogo são feitos com primitivas do pygame (`pygame.draw` e texto), em `src/interface.py`. Assim o jogo não depende de imagens externas.
+- **HUD:** faixa no topo com pontos, combo (em destaque quando há sequência de acertos) e vidas em forma de corações.
+- **Cartões:** mostram o rótulo "Sugestão da IA", o texto quebrado em linhas e a % de confiança em um selo e em uma barra. A confiança tem sempre a mesma cor, para não entregar se o cartão está certo, reforçando que confiança alta não garante acerto.
+- **Fim de jogo:** por enquanto mostra a pontuação final e os controles para jogar de novo ou sair. O resumo das decisões e as explicações dos erros ficam para a entrega final.
+- **Recursos externos:** a lista atualizada, com origem e licença, está na seção "Recursos externos" do README.md. Até agora não usamos imagens, sons ou fontes baixados da internet.

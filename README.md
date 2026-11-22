@@ -89,7 +89,7 @@ python -m pytest
   - `interface.py`: fundo, HUD, cartões com % de confiança e tela de fim de jogo.
 - `data/` ou `dados/`: `cartoes.json` com os cartões do jogo; recorde e ranking.
 - `assets/`: imagens, fontes e sons.
-- `tests/`: testes unitários com `pytest`.
+- `tests/`: testes unitários com `pytest` (lógica, cartões e quebra de texto da interface).
 - `docs/`: documentação do projeto, incluindo a proposta inicial.
 
 ### Divisão do trabalho
@@ -128,6 +128,13 @@ Cada cartão do JSON é um dicionário com as chaves `texto`, `ambiente`, `confi
 
 ## Recursos externos
 
-- Base do projeto: [template da disciplina](https://github.com/ICEI-PUC-Minas-PPL-CDIA/IntroAlgs_pygame_template).
-- Biblioteca: [pygame-ce](https://pyga.me/) (LGPL).
-- Imagens, sons e fontes: nenhum até o momento.
+| Recurso | Onde é usado | Origem | Licença |
+|---|---|---|---|
+| Template da disciplina | Estrutura de pastas e arquivos de exemplo (`src/jogo.py`, `src/sprites.py`, `assets/imagens/spritesheet.bmp`) | [IntroAlgs_pygame_template](https://github.com/ICEI-PUC-Minas-PPL-CDIA/IntroAlgs_pygame_template) | Material da disciplina (PUC Minas) |
+| pygame-ce | Janela, desenho, fontes e teclado | [pyga.me](https://pyga.me/) | LGPL 2.1 |
+| pytest | Testes automatizados (`tests/`) | [pytest.org](https://pytest.org/) | MIT |
+| Fonte Arial | Textos do HUD, dos cartões e do fim de jogo | Fonte do sistema operacional, carregada com `pygame.font.SysFont` (não é distribuída no repositório) | Licença do sistema (Microsoft) |
+
+- **Imagens:** o fundo da escola, o HUD, os corações, os cartões e a tela de fim de jogo são desenhados pelo próprio código com primitivas do pygame (`pygame.draw`). A `spritesheet.bmp` veio do template e não é usada pelo jogo (`main.py`).
+- **Fontes:** se a Arial não existir no computador, o pygame usa a fonte padrão que vem junto com ele, sem precisar de arquivo extra.
+- **Sons:** nenhum até o momento.
