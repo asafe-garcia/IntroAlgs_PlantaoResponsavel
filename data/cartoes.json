@@ -1,0 +1,170 @@
+[
+  {
+    "texto": "IA sugere nota 9,5 para redação que copia um texto da internet",
+    "ambiente": "escola",
+    "confianca": 97,
+    "confiavel": false,
+    "explicacao": "Alta confiança não garante acerto: a IA não detectou o plágio. O professor precisa revisar."
+  },
+  {
+    "texto": "Aluno com dificuldade em frações: recomendar exercícios de reforço",
+    "ambiente": "escola",
+    "confianca": 74,
+    "confiavel": true,
+    "explicacao": "A recomendação é coerente com as notas do aluno e o professor pode conferir o histórico."
+  },
+  {
+    "texto": "Prever que alunos de certo bairro vão reprovar",
+    "ambiente": "escola",
+    "confianca": 92,
+    "confiavel": false,
+    "explicacao": "Viés: a IA usou o bairro, e não o desempenho, e acabou rotulando alunos de forma injusta."
+  },
+  {
+    "texto": "Corrigir prova de múltipla escolha com o gabarito oficial",
+    "ambiente": "escola",
+    "confianca": 99,
+    "confiavel": true,
+    "explicacao": "Correção objetiva, baseada em regra clara e fácil de conferir."
+  },
+  {
+    "texto": "Resumo do livro com fatos inventados, sem citar fonte",
+    "ambiente": "escola",
+    "confianca": 95,
+    "confiavel": false,
+    "explicacao": "Alucinação: a IA inventou informações e não apresentou fonte para conferir."
+  },
+  {
+    "texto": "Sugerir material de estudo com base nos erros da última prova",
+    "ambiente": "escola",
+    "confianca": 68,
+    "confiavel": true,
+    "explicacao": "Sugestão baseada em dados reais do aluno. Confiança baixa não significa erro."
+  },
+  {
+    "texto": "Aluno com TDAH: reduzir tarefas sem falar com a família",
+    "ambiente": "escola",
+    "confianca": 88,
+    "confiavel": false,
+    "explicacao": "Decisões sobre apoio ao aluno exigem avaliação humana e diálogo com a família."
+  },
+  {
+    "texto": "Compartilhar notas e endereço do aluno com um app de terceiros",
+    "ambiente": "escola",
+    "confianca": 90,
+    "confiavel": false,
+    "explicacao": "Privacidade: dados pessoais só devem ser compartilhados quando necessário e autorizado."
+  },
+  {
+    "texto": "Lembrar o professor de entregar as notas até sexta-feira",
+    "ambiente": "escola",
+    "confianca": 85,
+    "confiavel": true,
+    "explicacao": "Lembrete simples, sem risco, baseado no calendário da escola."
+  },
+  {
+    "texto": "Indicar reprovação automática por faltas, sem revisão humana",
+    "ambiente": "escola",
+    "confianca": 93,
+    "confiavel": false,
+    "explicacao": "Decisões que afetam o futuro do aluno precisam de revisão por pessoas."
+  },
+  {
+    "texto": "Traduzir um aviso da escola para inglês, mantendo as datas",
+    "ambiente": "escola",
+    "confianca": 72,
+    "confiavel": true,
+    "explicacao": "Tarefa de apoio, com resultado fácil de revisar antes de enviar."
+  },
+  {
+    "texto": "Afirmar que a Grande Muralha da China é visível da Lua",
+    "ambiente": "escola",
+    "confianca": 96,
+    "confiavel": false,
+    "explicacao": "Informação falsa muito repetida. Sempre confira em fontes confiáveis."
+  },
+  {
+    "texto": "Dor de cabeça forte e febre: diagnóstico 'estresse', sem consulta",
+    "ambiente": "clinica",
+    "confianca": 94,
+    "confiavel": false,
+    "explicacao": "Sintomas graves exigem avaliação de um profissional de saúde, mesmo com alta confiança."
+  },
+  {
+    "texto": "Lembrar paciente de tomar o remédio às 8h, conforme a receita",
+    "ambiente": "clinica",
+    "confianca": 90,
+    "confiavel": true,
+    "explicacao": "Lembrete baseado na prescrição médica, com risco baixo."
+  },
+  {
+    "texto": "Triagem sugere menos prioridade para paciente idoso",
+    "ambiente": "clinica",
+    "confianca": 89,
+    "confiavel": false,
+    "explicacao": "Viés: a idade não pode ser o único critério para definir a prioridade."
+  },
+  {
+    "texto": "Marcar retorno em 30 dias, conforme pedido do médico",
+    "ambiente": "clinica",
+    "confianca": 76,
+    "confiavel": true,
+    "explicacao": "Ação simples, confirmada pelo registro do médico e fácil de conferir."
+  },
+  {
+    "texto": "Indicar dose de antibiótico sem checar peso e alergias",
+    "ambiente": "clinica",
+    "confianca": 91,
+    "confiavel": false,
+    "explicacao": "Doses dependem de dados do paciente. Um profissional deve validar a prescrição."
+  },
+  {
+    "texto": "Destacar na imagem do exame uma área para o médico analisar",
+    "ambiente": "clinica",
+    "confianca": 63,
+    "confiavel": true,
+    "explicacao": "A IA apoia a análise, mas quem decide é o médico. Confiança baixa pode ser aceitável."
+  },
+  {
+    "texto": "Enviar o prontuário completo para um app de bem-estar",
+    "ambiente": "clinica",
+    "confianca": 87,
+    "confiavel": false,
+    "explicacao": "Privacidade: dados de saúde são sensíveis e só devem ser compartilhados com autorização."
+  },
+  {
+    "texto": "Alertar interação entre dois remédios do mesmo paciente",
+    "ambiente": "clinica",
+    "confianca": 82,
+    "confiavel": true,
+    "explicacao": "Alerta com base na lista de medicamentos, que o farmacêutico pode revisar."
+  },
+  {
+    "texto": "Garantir cura de doença crônica com chá, citando um estudo",
+    "ambiente": "clinica",
+    "confianca": 95,
+    "confiavel": false,
+    "explicacao": "A IA citou um estudo que não existe. Verifique sempre a fonte."
+  },
+  {
+    "texto": "Agendar consulta no horário livre mais próximo da agenda",
+    "ambiente": "clinica",
+    "confianca": 88,
+    "confiavel": true,
+    "explicacao": "Tarefa administrativa de baixo risco, com resultado fácil de confirmar."
+  },
+  {
+    "texto": "Descartar exame alterado por parecer 'sem importância'",
+    "ambiente": "clinica",
+    "confianca": 92,
+    "confiavel": false,
+    "explicacao": "Resultados alterados sempre devem ser vistos por um profissional de saúde."
+  },
+  {
+    "texto": "Resumir o histórico do paciente para a consulta de hoje",
+    "ambiente": "clinica",
+    "confianca": 70,
+    "confiavel": true,
+    "explicacao": "O resumo ajuda o médico, que continua responsável por conferir os dados."
+  }
+]
