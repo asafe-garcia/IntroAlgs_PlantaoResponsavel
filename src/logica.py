@@ -27,7 +27,7 @@ def carregar_cartoes(caminho):
     Se o arquivo não existir, devolve uma lista vazia.
     """
     try:
-        with open(caminho, "r") as arquivo:
+        with open(caminho, "r", encoding="utf-8") as arquivo:
             return json.load(arquivo)
     except FileNotFoundError:
         return []
