@@ -1,8 +1,8 @@
 # Plantão Responsável
 
-Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
+Projeto final da disciplina de Introdução a Algoritmos/Programação (PUC Minas), desenvolvido com Python e Pygame a partir do [template da disciplina](https://github.com/ICEI-PUC-Minas-PPL-CDIA/IntroAlgs_pygame_template).
 
-Este repositório é um template para os grupos da disciplina. A proposta é começar com uma base funcional e evoluir o jogo ao longo do semestre.
+**Tema:** Inteligência Artificial no Cotidiano: Aplicações e Uso Responsável. O foco é a **revisão humana das sugestões da IA**, porque uma confiança alta não garante que a sugestão está certa.
 
 ## Integrantes do grupo
 
@@ -10,15 +10,6 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 - Caio Silveira Figueiredo
 - Erick Gabriel Chiaradia Kalil e Silva
 - Matheus Wike Carvalho
-
-## Estrutura do projeto
-
-- `main.py`: ponto de entrada da aplicação.
-- `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
-- `assets/`: imagens, fontes e sons.
-- `data/`: arquivos persistentes (recorde/ranking).
-- `tests/`: testes unitários com `pytest`.
-- `docs/`: documentação do projeto, incluindo proposta inicial.
 
 ## Descrição do jogo
 
@@ -50,16 +41,38 @@ O objetivo é aprovar as sugestões corretas da IA (coletando os cartões) e rej
 - P: pausar o jogo
 - ESC: sair do jogo
 
+## Status das entregas
+
+### Entrega 2: versão parcial executável (22/11)
+
+Escopo desta entrega:
+
+- ambiente **Escola** (o jogo já começa nele);
+- janela do Pygame e loop principal (eventos, atualização, desenho, 60 FPS);
+- revisor se movendo com setas ou A/D, sem sair da tela;
+- cartões caindo, lidos do arquivo JSON, com texto e % de confiança;
+- coletar o cartão = aprovar, deixar passar = rejeitar;
+- pontuação, combo e vidas na tela, com a explicação da última decisão no título da janela;
+- fim de jogo com 0 vidas. **Enter** (ou R) reinicia e **ESC** sai.
+
+### Entrega 3: versão final (29/11)
+
+Ainda falta: ambiente Clínica e menu de escolha (teclas 1 e 2), revisão com cargas (Espaço), 3 rodadas com velocidade crescente, pausa (P), condição de vitória e recorde salvo em arquivo.
+
 ## Como executar o projeto
 
-### 1. Clonar o repositório
+Precisa de Python 3 instalado (marque "Add python.exe to PATH" na instalação).
 
 ```bash
 git clone LINK_DO_REPOSITORIO
-cd NOME_DA_PASTA
+cd IntroAlgs_PlantaoResponsavel
 pip install -r requirements.txt
 python main.py
 ```
+
+No Windows, se `python` não funcionar, use `py` (por exemplo: `py -m pip install -r requirements.txt` e `py main.py`).
+
+O projeto usa o **pygame-ce**, que é instalado pelo `requirements.txt`. O pygame original não tem versão pronta para o Python 3.14 em diante, e o pygame-ce funciona igual (o código continua usando `import pygame`).
 
 ## Como executar os testes
 
@@ -67,15 +80,54 @@ python main.py
 python -m pytest
 ```
 
-## Checklist mínimo para entrega
+## Estrutura do projeto
 
-- Preencher este README com nome final, descrição real, regras e controles do jogo.
-- Atualizar `docs/proposta.MD` com a proposta do grupo.
-- Garantir que o jogo executa com `python main.py`.
-- Garantir que os testes passam com `pytest`.
+- `main.py`: ponto de entrada; janela, loop principal e integração dos módulos.
+- `src/`: código-fonte do jogo.
+  - `logica.py`: carregar e filtrar cartões, pontos, combo e vidas.
+  - `entidades.py`: revisor e cartões (movimento, queda e colisão).
+  - `interface.py`: fundo, HUD, cartões com % de confiança e tela de fim de jogo.
+- `data/` ou `dados/`: `cartoes.json` com os cartões do jogo; recorde e ranking.
+- `assets/`: imagens, fontes e sons.
+- `tests/`: testes unitários com `pytest`.
+- `docs/`: documentação do projeto, incluindo a proposta inicial.
 
-## Observações para os alunos
+### Divisão do trabalho
 
-- Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
-- Comentem partes importantes da lógica, principalmente regras do jogo.
-- Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.
+| Integrante | Parte |
+|---|---|
+| Erick Gabriel Chiaradia Kalil e Silva | Núcleo e integração (`main.py`, repositório, README) |
+| Caio Silveira Figueiredo | Jogador e cartões (`entidades.py`) |
+| Asafe Rodrigues Garcia | Dados e lógica (`logica.py`, `cartoes.json`, `tests/`) |
+| Matheus Wike Carvalho | Interface e recursos (`interface.py`, `docs/proposta.MD`) |
+
+### Funções que o `main.py` usa de cada módulo
+
+**logica.py**
+- `carregar_cartoes(caminho) -> lista`
+- `filtrar_por_ambiente(cartoes, ambiente) -> lista`
+- `calcular_pontos(pontos, combo, acertou) -> (pontos, combo)`
+- `perder_vida(vidas) -> int`
+
+**entidades.py**
+- `criar_revisor() -> pygame.Rect`
+- `mover_revisor(revisor, teclas)`
+- `desenhar_revisor(tela, revisor)`
+- `criar_cartao(cartao_dados) -> {"rect": pygame.Rect, "dados": cartao_dados}`
+- `atualizar_cartao(cartao)`
+- `saiu_da_tela(cartao) -> bool`
+- `colidiu(revisor, cartao) -> bool`
+
+**interface.py**
+- `desenhar_fundo(tela)`
+- `desenhar_hud(tela, pontos, vidas, combo)`
+- `desenhar_cartao(tela, cartao_rect, cartao_dados)`
+- `desenhar_fim_de_jogo(tela, pontos)`
+
+Cada cartão do JSON é um dicionário com as chaves `texto`, `ambiente`, `confianca`, `confiavel` e `explicacao`.
+
+## Recursos externos
+
+- Base do projeto: [template da disciplina](https://github.com/ICEI-PUC-Minas-PPL-CDIA/IntroAlgs_pygame_template).
+- Biblioteca: [pygame-ce](https://pyga.me/) (LGPL).
+- Imagens, sons e fontes: nenhum até o momento.
