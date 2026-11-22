@@ -24,6 +24,18 @@ QUADRO = (38, 84, 62)
 QUADRO_MOLDURA = (120, 82, 46)
 GIZ = (225, 235, 225)
 
+HUD_FUNDO = (35, 45, 60)
+HUD_TEXTO = (235, 240, 245)
+CORACAO = (220, 60, 70)
+CORACAO_VAZIO = (90, 100, 115)
+COMBO_DESTAQUE = (255, 200, 60)
+
+# ----------------------------------------------------------------------------
+# Medidas da interface
+# ----------------------------------------------------------------------------
+ALTURA_HUD = 50
+VIDAS_MAXIMAS = 3  # mesmo valor de VIDAS_INICIAIS no main.py
+
 # ----------------------------------------------------------------------------
 # Fontes
 # ----------------------------------------------------------------------------
@@ -82,12 +94,56 @@ def desenhar_fundo(tela):
 
 
 # ----------------------------------------------------------------------------
+# HUD
+# ----------------------------------------------------------------------------
+def desenhar_coracao(tela, centro_x, centro_y, tamanho, cor):
+    """Desenha um coração: dois círculos em cima e um triângulo embaixo."""
+    raio = tamanho // 4
+    pygame.draw.circle(tela, cor, (centro_x - raio, centro_y - raio // 2), raio)
+    pygame.draw.circle(tela, cor, (centro_x + raio, centro_y - raio // 2), raio)
+    pontas = [
+        (centro_x - 2 * raio, centro_y - raio // 4),
+        (centro_x + 2 * raio, centro_y - raio // 4),
+        (centro_x, centro_y + tamanho // 2),
+    ]
+    pygame.draw.polygon(tela, cor, pontas)
+
+
+def desenhar_hud(tela, pontos, vidas, combo):
+    """Desenha a faixa do topo: pontos à esquerda, combo no meio e vidas à direita."""
+    largura = tela.get_width()
+    centro_y = ALTURA_HUD // 2
+    fonte = pegar_fonte(24, negrito=True)
+
+    pygame.draw.rect(tela, HUD_FUNDO, (0, 0, largura, ALTURA_HUD))
+
+    # Pontos.
+    texto_pontos = fonte.render(f"Pontos: {pontos}", True, HUD_TEXTO)
+    tela.blit(texto_pontos, texto_pontos.get_rect(midleft=(20, centro_y)))
+
+    # Combo: só aparece em destaque quando há uma sequência de acertos.
+    if combo > 1:
+        texto_combo = fonte.render(f"Combo x{combo}", True, COMBO_DESTAQUE)
+    else:
+        texto_combo = fonte.render(f"Combo x{combo}", True, CORACAO_VAZIO)
+    tela.blit(texto_combo, texto_combo.get_rect(center=(largura // 2, centro_y)))
+
+    # Vidas: corações cheios para as vidas restantes e apagados para as perdidas.
+    tamanho = 22
+    espaco = 32
+    for i in range(VIDAS_MAXIMAS):
+        x = largura - 30 - (VIDAS_MAXIMAS - 1 - i) * espaco
+        if i < vidas:
+            cor = CORACAO
+        else:
+            cor = CORACAO_VAZIO
+        desenhar_coracao(tela, x, centro_y, tamanho, cor)
+
+
+# ----------------------------------------------------------------------------
 # Funções ainda em construção (próximos commits).
 # Já existem com a assinatura usada no main.py para o jogo abrir sem erro.
 # ----------------------------------------------------------------------------
-def desenhar_hud(tela, pontos, vidas, combo):
-    """Desenha pontos, vidas e combo no topo da tela. (em construção)"""
-    pass
 
 
 def desenhar_cartao(tela, rect, dados):
