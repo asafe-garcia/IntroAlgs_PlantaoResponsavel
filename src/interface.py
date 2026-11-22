@@ -30,6 +30,15 @@ CORACAO = (220, 60, 70)
 CORACAO_VAZIO = (90, 100, 115)
 COMBO_DESTAQUE = (255, 200, 60)
 
+CARTAO_FUNDO = (250, 250, 252)
+CARTAO_BORDA = (70, 80, 100)
+CARTAO_TEXTO = (30, 35, 45)
+CARTAO_ROTULO = (110, 115, 130)
+# A cor da confiança é SEMPRE a mesma (roxo neutro), para não sugerir que o
+# cartão está certo ou errado: decidir isso é tarefa do jogador.
+CONFIANCA_COR = (110, 80, 200)
+CONFIANCA_TRILHO = (225, 222, 238)
+
 # ----------------------------------------------------------------------------
 # Medidas da interface
 # ----------------------------------------------------------------------------
@@ -141,14 +150,81 @@ def desenhar_hud(tela, pontos, vidas, combo):
 
 
 # ----------------------------------------------------------------------------
-# Funções ainda em construção (próximos commits).
-# Já existem com a assinatura usada no main.py para o jogo abrir sem erro.
+# Cartões
 # ----------------------------------------------------------------------------
+def quebrar_texto(texto, fonte, largura_maxima):
+    """Divide o texto em linhas que cabem na largura dada (em pixels).
+
+    As palavras nunca são cortadas no meio: quando a próxima palavra não
+    cabe, ela começa uma nova linha.
+    """
+    linhas = []
+    linha_atual = ""
+    for palavra in texto.split():
+        if linha_atual == "":
+            tentativa = palavra
+        else:
+            tentativa = linha_atual + " " + palavra
+        if fonte.size(tentativa)[0] <= largura_maxima or linha_atual == "":
+            linha_atual = tentativa
+        else:
+            linhas.append(linha_atual)
+            linha_atual = palavra
+    if linha_atual != "":
+        linhas.append(linha_atual)
+    return linhas
 
 
 def desenhar_cartao(tela, rect, dados):
-    """Desenha um cartão com o texto e a % de confiança. (em construção)"""
-    pass
+    """Desenha um cartão com o texto da sugestão e a % de confiança da IA.
+
+    O campo 'confiavel' NÃO é usado aqui: o cartão não pode entregar a resposta.
+    """
+    margem = 10
+    fonte_rotulo = pegar_fonte(12, negrito=True)
+    fonte_texto = pegar_fonte(15)
+
+    # Corpo do cartão.
+    pygame.draw.rect(tela, CARTAO_FUNDO, rect, border_radius=8)
+    pygame.draw.rect(tela, CARTAO_BORDA, rect, width=2, border_radius=8)
+
+    # Linha de cima: rótulo à esquerda e % de confiança à direita.
+    rotulo = fonte_rotulo.render("SUGESTÃO DA IA", True, CARTAO_ROTULO)
+    tela.blit(rotulo, (rect.x + margem, rect.y + 7))
+
+    confianca = dados.get("confianca", 0)
+    texto_confianca = fonte_rotulo.render(f"Confiança {confianca}%", True, BRANCO)
+    selo = texto_confianca.get_rect()
+    selo.inflate_ip(12, 4)
+    selo.topright = (rect.right - margem + 4, rect.y + 5)
+    pygame.draw.rect(tela, CONFIANCA_COR, selo, border_radius=8)
+    tela.blit(texto_confianca, texto_confianca.get_rect(center=selo.center))
+
+    # Texto da sugestão, quebrado em linhas. Se sobrar texto, termina em "...".
+    altura_linha = fonte_texto.get_linesize()
+    topo_texto = rect.y + 26
+    espaco_texto = rect.bottom - 10 - topo_texto
+    max_linhas = max(1, espaco_texto // altura_linha)
+    linhas = quebrar_texto(dados.get("texto", ""), fonte_texto, rect.width - 2 * margem)
+    if len(linhas) > max_linhas:
+        linhas = linhas[:max_linhas]
+        linhas[-1] = linhas[-1] + "..."
+    for i, linha in enumerate(linhas):
+        superficie = fonte_texto.render(linha, True, CARTAO_TEXTO)
+        tela.blit(superficie, (rect.x + margem, topo_texto + i * altura_linha))
+
+    # Barra de confiança na base do cartão (mesma cor para qualquer valor).
+    trilho = pygame.Rect(rect.x + margem, rect.bottom - 8, rect.width - 2 * margem, 4)
+    pygame.draw.rect(tela, CONFIANCA_TRILHO, trilho, border_radius=2)
+    preenchido = trilho.copy()
+    preenchido.width = int(trilho.width * max(0, min(confianca, 100)) / 100)
+    pygame.draw.rect(tela, CONFIANCA_COR, preenchido, border_radius=2)
+
+
+# ----------------------------------------------------------------------------
+# Funções ainda em construção (próximos commits).
+# Já existem com a assinatura usada no main.py para o jogo abrir sem erro.
+# ----------------------------------------------------------------------------
 
 
 def desenhar_fim_de_jogo(tela, pontos):
